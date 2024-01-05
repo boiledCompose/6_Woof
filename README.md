@@ -117,4 +117,59 @@
            style = MaterialTheme.typography.displayMedium,
     )
     ```
+    
+  <br>
+  <h2>상단 바</h2>
+
+  <h3>Scaffold</h3>
+
+  > [!NOTE]
+  > 다양한 구성요소와 화면 요소의 슬롯을 제공하는 레이아웃이다.   
+  > Scaffold는 contentWindowInsets 매개변수를 지원한다. 이는 화면에서 앱이 시스템 UI와 교차할 수 있는 부분이다. [상세보기](https://developer.android.com/develop/ui/views/layout/insets?hl=ko)
+
+  - 예제 코드
+    ```
+    @Composable
+    fun WoofApp() {
+       Scaffold(
+           topBar = {
+               WoofTopAppBar()
+           }
+       ) { it ->
+           LazyColumn(contentPadding = it) {
+               items(dogs) {
+                   DogItem(
+                       dog = it,
+                       modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small))
+                   )
+               }
+           }
+       }
+    }
+
+    @Composable
+    fun WoofTopAppBar(modifier: Modifier = Modifier) {
+       CenterAlignedTopAppBar(
+           title = {
+               Row(
+                   verticalAlignment = Alignment.CenterVertically
+               )  {
+                   Image(
+                       modifier = Modifier
+                           .size(dimensionResource(id = R.dimen.image_size))
+                           .padding(dimensionResource(id = R.dimen.padding_small)),
+                       painter = painterResource(R.drawable.ic_woof_logo),
+      
+                       contentDescription = null
+                   )
+                   Text(
+                       text = stringResource(R.string.app_name),
+                       style = MaterialTheme.typography.displayLarge
+                   )
+               }
+           },
+           modifier = modifier
+       )
+    }
+    ```
 </p>
