@@ -11,7 +11,7 @@
   - **tertiary**: 기본 색상과 보조 색상의 균형을 맞추거나 입력란과 같은 특정 요소로 관심을 유도하는 데 사용할 수 있는 대비 강조를 위해 사용된다.
   - **on**: on이 붙은 요소들은 팔레트의 색상 위에 나타나며, 주로 텍스트, 아이콘, 획에 적용된다.
 <br>
-  <h2>Dimens 파일</h2>
+  <h2>dimens.xml</h2>
   
   > [!NOTE]
   > 크기 값을 저장하기 위해 사용되는 파일  
@@ -29,5 +29,92 @@
     ```
     modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small))
     ```
+
+  <br>
+  <h2>Shape.kt</h2>
+
+  > [!NOTE]
+  > 구성요소의 테두리 모양/도형을 정의하는데 사용되는 파일 [상세보기](https://m3.material.io/styles/shape/shape-scale-tokens#b09934f1-1b0f-4ce4-ade6-4a1f138add6c)   
+  > 경로: **"app > src > project ... package > ui.theme > Shape.kt"**
+   
+
+  - 구성요소는 소형, 중형, 대형의 세 가지 유형이 있다. 각각에 대해 도형 모양을 지정할 수 있다. 유형에 맞는 구성 요소들은 자동으로 모양이 바뀐다.
+    ```
+    val Shapes = Shapes(
+      small = RoundedCornerShape(50.dp),
+      medium = RoundedCornerShape(40.dp, 30.dp, 20.dp, 0.dp),
+      large = RoundedCornerShape(10.dp)
+    )
+    ```
+  - 사용자가 직접 `modifier`를 통해 모양을 지정할 수 있다.
+    ```
+    //여기서 MaterialTheme은 테마 이름으로, Theme.kt에 작성된 테마 객체다.
+    
+    modifier.clip(MaterialTheme.shapes.small)
+    ```
+  - 이미지의 경우, 바뀐 모양에 이미지를 맞추려면 contentScale 요소를 사용하면 된다.
+    ```
+    Image(
+      ...,
+      contentScale = ContentScale.Crop
+    )
+    ```
+
+  <br>
+  <h2>서체와 Typography</h2>
   
+  > [!NOTE]
+  > 서체 파일인 ttf 파일을 font 디렉토리에 저장하고, ttf 파일을 Type.kt에 객체화하여 사용할 수 있다.
+  > 경로: **"app > src > project ... package > ui.theme > Type.kt"**
+  > [서체 다운로드 사이트](https://fonts.google.com/?hl=ko)  
+
+  - 저장된 폰트를 FontFamily 객체로 선언한다.
+    ```
+    //Type.kt
+    val AbrilFatface = FontFamily(
+      Font(R.font.abril_fatface_regular)
+    )
+    ```
+  - 스타일에 따라 다른 폰트를 불러올 수 있도록 조정할 수 있다.
+    ```
+    val Montserrat = FontFamily(
+      Font(R.font.montserrat_regular),
+      Font(R.font.montserrat_bold, FontWeight.Bold)
+    )
+    ```
+  - **Typography** 객체에는 13가지 서체를 위한 매개변수가 있다.
+    ![image](https://github.com/boiledCompose/Woof/assets/101652649/9e858568-43c8-4e37-a16e-6c74f6f7e2ba)
+    
+  - 객체 선언 시 매개변수 별로 TextStyle을 지정할 수 있다.
+    ```
+    val Typography = Typography(
+      displayLarge = TextStyle(
+        fontFamily = AbrilFatface,
+        fontWeight = FontWeight.Normal,
+        fontSize = 36.sp
+      ),
+      displayMedium = TextStyle(
+        fontFamily = Montserrat,
+        fontWeight = FontWeight.Bold,
+        fontSize = 20.sp
+      ),
+      labelSmall = TextStyle(
+        fontFamily = Montserrat,
+        fontWeight = FontWeight.Bold,
+        fontSize = 14.sp
+      ),
+      bodyLarge = TextStyle(
+        fontFamily = Montserrat,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp
+      )
+    )
+    ```
+  - 텍스트의 **style 요소**을 통해 TextStyle을 지정할 수 있다.
+    ```
+    Text(
+           text = "Hello World",
+           style = MaterialTheme.typography.displayMedium,
+    )
+    ```
 </p>
