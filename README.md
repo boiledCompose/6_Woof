@@ -83,7 +83,7 @@
     )
     ```
   - **Typography** 객체에는 13가지 서체를 위한 매개변수가 있다.
-    ![image](https://github.com/boiledCompose/Woof/assets/101652649/9e858568-43c8-4e37-a16e-6c74f6f7e2ba)
+    ![image](https://github.com/boiledCompose/Woof/assets/101652649/1b69b8ab-6867-4c8b-a797-b60478612a80)
     
   - 객체 선언 시 매개변수 별로 TextStyle을 지정할 수 있다.
     ```
